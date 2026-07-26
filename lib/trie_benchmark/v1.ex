@@ -47,7 +47,7 @@ defmodule TrieBenchmark.V1 do
       trie_hard: &search_trie_hard(trie_hard, &1, max_matches),
       retrieval: &search_retrieval(retrieval, &1),
       dimi_trie: &search_dimi_trie(dimi_trie, &1),
-      using_ets: &search_using_ets(using_ets, &1)
+      using_ets: &search_using_ets(using_ets, &1, max_matches)
     }
   end
 
@@ -169,7 +169,7 @@ defmodule TrieBenchmark.V1 do
     end
   end
 
-  defp search_using_ets(ets, input) do
+  defp search_using_ets(ets, input, max_matches) do
     # Unlike the others, this extra first check is mandatory,
     # since `:ets.next` would actually skip over our exact match.
     case :ets.member(ets, input) do
@@ -177,7 +177,7 @@ defmodule TrieBenchmark.V1 do
         {:ok, input}
 
       false ->
-        case ets_all_matches(ets, input, input) do
+        case ets_all_matches(ets, input, input, max_matches) do
           [] -> {:error, :not_found}
           [match] -> {:ok, match}
           # Unlike the others, we don't need to check_exact_match/2 here.
@@ -186,9 +186,11 @@ defmodule TrieBenchmark.V1 do
     end
   end
 
-  defp ets_all_matches(ets, input, pos) do
+  defp ets_all_matches(_ets, _input, _pos, 0), do: []
+
+  defp ets_all_matches(ets, input, pos, max) do
     case :ets.next(ets, pos) do
-      ^input <> _ = match -> [match | ets_all_matches(ets, input, match)]
+      ^input <> _ = match -> [match | ets_all_matches(ets, input, match, max - 1)]
       _ -> []
     end
   end
