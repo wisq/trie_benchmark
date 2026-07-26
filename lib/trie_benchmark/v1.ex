@@ -127,7 +127,7 @@ defmodule TrieBenchmark.V1 do
       results =
         checks
         |> Map.new(fn {key, fun} ->
-          {key, fun.(word) |> limit_ambiguous(max_ambiguous)}
+          {key, fun.(word) |> sanity_check_ambiguous(max_ambiguous)}
         end)
 
       case Map.values(results) |> Enum.uniq() do
@@ -137,11 +137,14 @@ defmodule TrieBenchmark.V1 do
     end)
   end
 
-  defp limit_ambiguous(rval, :all), do: rval
-  defp limit_ambiguous({:ok, _} = rval, _), do: rval
-  defp limit_ambiguous({:error, _} = rval, _), do: rval
+  defp sanity_check_ambiguous({:ok, _} = rval, _), do: rval
+  defp sanity_check_ambiguous({:error, _} = rval, _), do: rval
 
-  defp limit_ambiguous({:error, :ambiguous, list}, max) when is_integer(max) do
+  defp sanity_check_ambiguous({:error, :ambiguous, list}, :all) do
+    {:error, :ambiguous, Enum.sort(list)}
+  end
+
+  defp sanity_check_ambiguous({:error, :ambiguous, list}, max) when is_integer(max) do
     {:error, :ambiguous, Enum.count(list) |> min(max)}
   end
 
@@ -181,7 +184,7 @@ defmodule TrieBenchmark.V1 do
           [] -> {:error, :not_found}
           [match] -> {:ok, match}
           # Unlike the others, we don't need to check_exact_match/2 here.
-          [_, _ | _] = list -> {:error, :ambiguous, Enum.sort(list)}
+          [_, _ | _] = list -> {:error, :ambiguous, list}
         end
     end
   end
@@ -198,7 +201,7 @@ defmodule TrieBenchmark.V1 do
   defp check_exact_match(list, input) do
     case input in list do
       true -> {:ok, input}
-      false -> {:error, :ambiguous, Enum.sort(list)}
+      false -> {:error, :ambiguous, list}
     end
   end
 end
