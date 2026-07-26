@@ -1,0 +1,10 @@
+%{
+  "benchee": {:hex, :benchee, "1.5.1", "b95cbc36c4b98969a5c592a246e171041eb683c56bad1cb4f49a3b081ba66087", [:mix], [{:deep_merge, "~> 1.0", [hex: :deep_merge, repo: "hexpm", optional: false]}, {:statistex, "~> 1.1", [hex: :statistex, repo: "hexpm", optional: false]}, {:table, "~> 0.1.0", [hex: :table, repo: "hexpm", optional: true]}], "hexpm", "a539301f8dfd4efc5c5123bfb9d47ebde20092a863a5b5b16c2a60d2243dfce7"},
+  "castore": {:hex, :castore, "1.0.20", "455e48f7115eca98c9f2b0e7a152b5a2e8f2a8a4f964c96e95bd31645ee5fa59", [:mix], [], "hexpm", "940eafbfd8b14bee649f083bc11b3b54ec555b54c3e4ea8213351ff6fee39c10"},
+  "deep_merge": {:hex, :deep_merge, "1.0.2", "476aa7ea61c54de96220051b998d893869069094da65b96101aebf79416f8a1e", [:mix], [], "hexpm", "737a53cdc9758fedbb608bdc213969e65729466c4ef3cd8e8726d0335dff116c"},
+  "retrieval": {:hex, :retrieval, "0.9.1", "0e9924729d0ed12a38089e8e9ce1c6564d0adf9f83eb0172a3f3c018aa27f2f9", [:mix], [], "hexpm", "7351d87068be71b10e430ffb9dc34c73e529dd794b4606698a071de547286caa"},
+  "rustler_precompiled": {:hex, :rustler_precompiled, "0.8.4", "700a878312acfac79fb6c572bb8b57f5aae05fe1cf70d34b5974850bbf2c05bf", [:mix], [{:castore, "~> 0.1 or ~> 1.0", [hex: :castore, repo: "hexpm", optional: false]}, {:rustler, "~> 0.23", [hex: :rustler, repo: "hexpm", optional: true]}], "hexpm", "3b33d99b540b15f142ba47944f7a163a25069f6d608783c321029bc1ffb09514"},
+  "statistex": {:hex, :statistex, "1.1.1", "73612aa7f79e53c30569be065fd121e380f1cf57bc4c2da5b41be9246da18df9", [:mix], [], "hexpm", "310c4b49b34adf683de3103639006bed233ab54c08a4add65a531448e653857c"},
+  "trie": {:git, "https://github.com/dimitarvp/trie", "a43fe67c05f40e0fef5ae901181fa9b24011dd19", [tag: "master"]},
+  "trie_hard": {:hex, :trie_hard, "0.2.7", "783986f3978a78c73c03aad886ee480746320034ec71edb61021350fc2b7c38a", [:mix], [{:rustler, ">= 0.0.0", [hex: :rustler, repo: "hexpm", optional: true]}, {:rustler_precompiled, "~> 0.8.0", [hex: :rustler_precompiled, repo: "hexpm", optional: false]}], "hexpm", "a4e38213802bc80f54e4d05152d74ee1ed59e5679d5ccaa45655ce4c946babbc"},
+}
