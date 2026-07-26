@@ -25,13 +25,18 @@ defmodule TrieBenchmark do
 
   def start(_, _) do
     unless iex_running?() do
+      TrieBenchmark.V1.run(@pennmush_commands, 10)
       TrieBenchmark.V1.run(@pennmush_commands)
-      TrieBenchmark.V1.run(words_from_dict() |> Enum.take(10000))
-      TrieBenchmark.V1.run(words_from_dict() |> Enum.take(100_000))
-
       TrieBenchmark.V2.run(@pennmush_commands)
-      TrieBenchmark.V2.run(words_from_dict() |> Enum.take(10000))
-      TrieBenchmark.V2.run(words_from_dict() |> Enum.take(100_000))
+
+      [1_000, 10_000, 100_000]
+      |> Enum.each(fn count ->
+        words = words_from_dict() |> Enum.take(count)
+
+        TrieBenchmark.V1.run(words, 10)
+        TrieBenchmark.V1.run(words)
+        TrieBenchmark.V2.run(words)
+      end)
     end
 
     {:ok, self()}
@@ -48,6 +53,14 @@ defmodule TrieBenchmark do
     |> Enum.shuffle()
     |> Stream.map(&:string.chomp/1)
     |> Stream.filter(&(&1 =~ ~r{^[a-z]+$}))
+  end
+
+  def partial_words(words) do
+    words
+    |> Stream.map(fn word ->
+      len = String.length(word)
+      String.slice(word, 0, Enum.random(1..len))
+    end)
   end
 
   defp iex_running? do

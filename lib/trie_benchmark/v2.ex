@@ -2,7 +2,7 @@ defmodule TrieBenchmark.V2 do
   alias TrieBenchmark, as: TB
 
   def run(commands) do
-    IO.puts("\n**** Running with #{Enum.count(commands)} possible commands ****\n")
+    IO.puts("\n**** Running V2 with #{Enum.count(commands)} possible commands ****\n")
 
     query_funcs = build_all_queries(commands)
     random_input = generate_random_input(800, 200, commands)
@@ -42,7 +42,7 @@ defmodule TrieBenchmark.V2 do
       {t, v} =
         :timer.tc(fn ->
           fun.()
-          |> partial_words()
+          |> TB.partial_words()
           |> Enum.take(count)
         end)
 
@@ -51,14 +51,6 @@ defmodule TrieBenchmark.V2 do
       v
     end)
     |> Enum.shuffle()
-  end
-
-  defp partial_words(words) do
-    words
-    |> Stream.map(fn word ->
-      len = String.length(word)
-      String.slice(word, 0, Enum.random(1..len))
-    end)
   end
 
   defp build_trie_hard(words) do
