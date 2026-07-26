@@ -983,7 +983,13 @@ Either way, the ETS approach has basically all the benefits of the TrieHard API 
 
 The one caveat is, **I have not tested table writes AT ALL.**  I don't even measure how long it takes to set up the initial tables, because I just don't care.  My use case is to generate the table once at startup, and then rarely modify it, if at all.  If your use case involves frequent and heavy table modification, you should absolutely do your own benchmarks.
 
-### The `triehard1` approach universally beat the `triehard2` approach.
+### TrieHard is a close second when you don't need all partial matches
+
+Amongst all the V2 tests, and all the V1 tests with input filtering disabled, you won't find a single case where TrieHard — or at least, `triehard1`, see below — isn't in second place.
+
+The performance gains here have nothing to do with language or overall code efficiency.  It simply comes down to having the ability to only match `n` partial matches before you just throw your hands up and go "ambiguous, try again".  (That's why the ETS approach also sees similar gains in this scenario.)
+
+#### The `triehard1` approach universally beat the `triehard2` approach
 
 In hindsight, this makes a lot of sense.  In the V2 benchmark,
 
@@ -991,3 +997,15 @@ In hindsight, this makes a lot of sense.  In the V2 benchmark,
  - `triehard2` does a get-autocomplete (exact match, get up to 2 partial matches, successful match if we only get 1 partial).
 
 My initial thought was that doing a count would save us from needlessly retrieving table data.  But if the input is highly ambiguous, counting the matches can involve **a lot** of table traversal.  Returning just two matches is incredibly easy by comparison.
+
+### If you always need a complete list of partial matches, Retrieval is fine
+
+Retrieval actually beats TrieHard in several of the "V1 with input filtering" and "V1 with all matches retrieved" scenarios.  It's a solid library for what it does (and its age), it just lacks some of the functions that make TrieHard and ETS more useful for typical real-world uses.
+
+### dimitarvp's Trie is mainly useful if you don't need exact matches
+
+Unfortunately, the lack of an ability to directly query for an exact match is really painful here.  The fact that e.g. "car" can match "card", "cartwheel", "cardamom", "carve", "carrot", etc etc, makes it really difficult to just check if "car" is in a typical dictionary using this library.
+
+Obviously, you can always maintain a `Map` alongside your `Trie` if exact matches are important to you, but all the other approaches offer this functionality in the same data structure.
+
+This library also spent most of its time around the bottom of the performance charts, with one major exception — in the V1 case with 100k commands, all matches, and no filtering, it actually outperformed everything except ETS.  (Granted, ETS still outperformed it by nearly 5x.)
