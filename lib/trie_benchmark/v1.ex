@@ -1,17 +1,25 @@
 defmodule TrieBenchmark.V1 do
   alias TrieBenchmark, as: TB
 
-  def run(commands, max_matches \\ :all) do
+  def run(commands, opts) do
+    {max_matches, opts} = Keyword.pop(opts, :max_matches, :all)
+    {filter_input?, opts} = Keyword.pop(opts, :filter_input, true)
+    unless Enum.empty?(opts), do: raise("Unknown options: #{inspect(opts)}")
+
     IO.puts([
       "\n",
       "**** Running V1 with #{Enum.count(commands)} possible commands",
-      " and #{max_matches} possible matches ****",
-      "\n"
+      " #{max_matches} possible matches,",
+      " input fitering #{if filter_input?, do: "enabled", else: "disabled"}",
+      " ****\n"
     ])
 
+    max_input_matches = if filter_input?, do: max_matches, else: :all
     query_funcs = build_all_queries(commands, max_matches)
-    random_input = generate_random_input(800, 200, commands, max_matches)
-    sanity_check(random_input, query_funcs)
+    random_input = generate_random_input(800, 200, commands, max_input_matches)
+
+    max_ambiguous = if !filter_input?, do: max_matches, else: :all
+    sanity_check(random_input, query_funcs, max_ambiguous)
 
     Benchee.run(
       query_funcs
@@ -113,27 +121,35 @@ defmodule TrieBenchmark.V1 do
   defp build_retrieval(words), do: Retrieval.new(words)
   defp build_dimi_trie(words), do: Trie.put_words(words)
 
-  defp sanity_check(random_input, checks) do
+  defp sanity_check(random_input, checks, max_ambiguous) do
     random_input
     |> Enum.each(fn word ->
       results =
         checks
         |> Map.new(fn {key, fun} ->
-          {key, fun.(word)}
+          {key, fun.(word) |> limit_ambiguous(max_ambiguous)}
         end)
 
       case Map.values(results) |> Enum.uniq() do
         [_] -> :ok
-        [_ | _] -> raise "Mismatch looking up #{inspect(word)}: #{inspect(results)}"
+        [_, _ | _] -> raise "Mismatch looking up #{inspect(word)}: #{inspect(results)}"
       end
     end)
+  end
+
+  defp limit_ambiguous(rval, :all), do: rval
+  defp limit_ambiguous({:ok, _} = rval, _), do: rval
+  defp limit_ambiguous({:error, _} = rval, _), do: rval
+
+  defp limit_ambiguous({:error, :ambiguous, list}, max) when is_integer(max) do
+    {:error, :ambiguous, Enum.count(list) |> min(max)}
   end
 
   defp search_trie_hard(trie, input, max_matches) do
     case TrieHard.auto_complete(trie, input, max_matches) do
       {:ok, []} -> {:error, :not_found}
       {:ok, [match]} -> {:ok, match}
-      {:ok, [_ | _] = list} -> check_exact_match(list, input)
+      {:ok, [_, _ | _] = list} -> check_exact_match(list, input)
     end
   end
 
@@ -141,7 +157,7 @@ defmodule TrieBenchmark.V1 do
     case Retrieval.prefix(trie, input) do
       [] -> {:error, :not_found}
       [match] -> {:ok, match}
-      [_ | _] = list -> check_exact_match(list, input)
+      [_, _ | _] = list -> check_exact_match(list, input)
     end
   end
 
@@ -149,7 +165,7 @@ defmodule TrieBenchmark.V1 do
     case Trie.search(trie, input) do
       [] -> {:error, :not_found}
       [match] -> {:ok, match}
-      [_ | _] = list -> check_exact_match(list, input)
+      [_, _ | _] = list -> check_exact_match(list, input)
     end
   end
 
@@ -165,7 +181,7 @@ defmodule TrieBenchmark.V1 do
           [] -> {:error, :not_found}
           [match] -> {:ok, match}
           # Unlike the others, we don't need to check_exact_match/2 here.
-          [_ | _] = list -> {:error, :ambiguous, Enum.sort(list)}
+          [_, _ | _] = list -> {:error, :ambiguous, Enum.sort(list)}
         end
     end
   end

@@ -24,22 +24,25 @@ defmodule TrieBenchmark do
   }
 
   def start(_, _) do
-    unless iex_running?() do
-      TrieBenchmark.V1.run(@pennmush_commands, 10)
-      TrieBenchmark.V1.run(@pennmush_commands)
-      TrieBenchmark.V2.run(@pennmush_commands)
-
-      [1_000, 10_000, 100_000]
-      |> Enum.each(fn count ->
-        words = words_from_dict() |> Enum.take(count)
-
-        TrieBenchmark.V1.run(words, 10)
-        TrieBenchmark.V1.run(words)
-        TrieBenchmark.V2.run(words)
-      end)
-    end
-
+    unless iex_running?(), do: run()
     {:ok, self()}
+  end
+
+  defp run do
+    wordlist = words_from_dict() |> Enum.take(100_000)
+
+    [
+      @pennmush_commands,
+      wordlist |> Enum.take_random(1000),
+      wordlist |> Enum.take_random(10000),
+      wordlist
+    ]
+    |> Enum.each(fn words ->
+      TrieBenchmark.V1.run(words, max_matches: 10, filter_input: true)
+      TrieBenchmark.V1.run(words, max_matches: 10, filter_input: false)
+      TrieBenchmark.V1.run(words, max_matches: :all)
+      TrieBenchmark.V2.run(words)
+    end)
   end
 
   def words_from_commands(commands) do
