@@ -1,0 +1,30 @@
+diff -ruN deps/retrieval/mix.exs deps.new/retrieval/mix.exs
+--- deps/retrieval/mix.exs	2026-07-25 23:22:22
++++ deps.new/retrieval/mix.exs	2026-07-25 22:09:37
+@@ -5,11 +5,11 @@
+     [app: :retrieval,
+      version: "0.9.1",
+      elixir: "~> 1.2",
+-     description: description,
+-     package: package,
++     description: description(),
++     package: package(),
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+-     deps: deps]
++     deps: deps()]
+   end
+ 
+   def application do
+diff -ruN deps/trie/lib/trie.ex deps.new/trie/lib/trie.ex
+--- deps/trie/lib/trie.ex	2026-07-25 23:22:21
++++ deps.new/trie/lib/trie.ex	2026-07-25 22:14:01
+@@ -341,7 +341,7 @@
+   Searches for a prefix and returns a list of word matches.
+   """
+   def search(%__MODULE__{} = t, prefix) when is_binary(prefix) do
+-    cut_prefix = String.slice(prefix, 0..-2)
++    cut_prefix = String.slice(prefix, 0..-2//1)
+     sub_trie = get(t, prefix) || %__MODULE__{}
+ 
+     sub_trie
