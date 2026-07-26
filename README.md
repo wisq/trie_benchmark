@@ -962,7 +962,9 @@ It was at this point that I added the ETS approach.  I had used an ETS for parti
 
 And this was where the real shocker happened: The ETS approach was immediately and decisively beating all of the other approaches — and its advantage actually grew larger with trie size.  This was especially surprising because ETS `ordered_set` isn't technically a trie at all, but rather, a binary search tree (BST) based on Erlang term order.
 
-For the sake of completeness, I continued to expand the scenarios, adding variations and adjustments that would better match how I might use the library, or that would demonstrate the strengths or weaknesses of the various libraries.  In these variations, the three libraries jockeyed for position — but in every single scenario, the ETS approach came out on top.
+For the sake of completeness, I continued to expand the scenarios, adding variations and adjustments that would better match how I might use the library, or that would demonstrate the strengths or weaknesses of the various libraries.
+
+In these variations, the three libraries jockeyed for position.  The pure Elixir libraries (`dimi_trie`, Retrieval) usually had fairly similar performance, and TrieHard tended to do better when it could benefit from a low partial match limit.  Meanwhile, in each and every scenario, the ETS approach came out on top.
 
 ## Conclusions & takeaways
 
