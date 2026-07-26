@@ -95,10 +95,10 @@ This suite uses four datasets of increasingly larger size.  Each dataset is used
   <summary>For the 175 PennMUSH commands</summary>
 
 ```
-**** Running V1 with 175 possible commands 10 possible matches, input fitering enabled ****
+**** Running V1 with 175 possible commands, 10 possible matches, input fitering enabled ****
 
-Generated 800 words from commands in 22874 µs.
-Generated 200 words from dict in 137089 µs.
+Generated 800 words from commands in 20640 µs.
+Generated 200 words from dict in 138007 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -125,31 +125,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets        2.86 K      350.16 μs     ±5.08%      342.92 μs      412.75 μs
-retrieval        2.27 K      440.18 μs     ±3.04%      437.50 μs      487.58 μs
-trie_hard        1.79 K      558.84 μs     ±2.67%      555.96 μs      613.96 μs
-dimi_trie        1.23 K      815.99 μs     ±3.25%      800.67 μs      886.22 μs
+using_ets        2.93 K      341.28 μs     ±4.01%      332.92 μs      373.67 μs
+retrieval        2.35 K      425.14 μs     ±2.31%      424.25 μs      461.75 μs
+trie_hard        1.81 K      552.93 μs     ±2.17%         552 μs      594.82 μs
+dimi_trie        1.27 K      789.77 μs     ±2.77%      780.67 μs      855.52 μs
 
 Comparison: 
-using_ets        2.86 K
-retrieval        2.27 K - 1.26x slower +90.02 μs
-trie_hard        1.79 K - 1.60x slower +208.68 μs
-dimi_trie        1.23 K - 2.33x slower +465.83 μs
+using_ets        2.93 K
+retrieval        2.35 K - 1.25x slower +83.86 μs
+trie_hard        1.81 K - 1.62x slower +211.65 μs
+dimi_trie        1.27 K - 2.31x slower +448.48 μs
 
 Memory usage statistics:
 
 Name         Memory usage
 using_ets         0.23 MB
-retrieval         1.65 MB - 7.15x memory usage +1.42 MB
-trie_hard        0.143 MB - 0.62x memory usage -0.08794 MB
-dimi_trie         1.84 MB - 7.97x memory usage +1.61 MB
+retrieval         1.59 MB - 7.02x memory usage +1.36 MB
+trie_hard        0.141 MB - 0.62x memory usage -0.08486 MB
+dimi_trie         1.80 MB - 7.96x memory usage +1.57 MB
 
 **All measurements for memory usage were the same**
 
-**** Running V1 with 175 possible commands 10 possible matches, input fitering disabled ****
+**** Running V1 with 175 possible commands, 10 possible matches, input fitering disabled ****
 
 Generated 800 words from commands in 459 µs.
-Generated 200 words from dict in 132803 µs.
+Generated 200 words from dict in 168917 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -176,31 +176,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets        2.45 K        0.41 ms     ±4.46%        0.41 ms        0.46 ms
-trie_hard        1.25 K        0.80 ms     ±4.23%        0.81 ms        0.89 ms
-retrieval        0.21 K        4.79 ms     ±5.42%        4.69 ms        5.66 ms
-dimi_trie       0.185 K        5.42 ms     ±1.62%        5.42 ms        5.67 ms
+using_ets        2.42 K        0.41 ms     ±4.19%        0.42 ms        0.45 ms
+trie_hard        1.17 K        0.85 ms     ±4.23%        0.86 ms        0.92 ms
+retrieval        0.20 K        4.97 ms     ±2.99%        4.94 ms        5.50 ms
+dimi_trie       0.191 K        5.23 ms     ±9.39%        5.03 ms        6.43 ms
 
 Comparison: 
-using_ets        2.45 K
-trie_hard        1.25 K - 1.97x slower +0.39 ms
-retrieval        0.21 K - 11.74x slower +4.38 ms
-dimi_trie       0.185 K - 13.29x slower +5.01 ms
+using_ets        2.42 K
+trie_hard        1.17 K - 2.06x slower +0.44 ms
+retrieval        0.20 K - 12.01x slower +4.55 ms
+dimi_trie       0.191 K - 12.65x slower +4.82 ms
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets         0.31 MB
-trie_hard        0.193 MB - 0.62x memory usage -0.11867 MB
-retrieval        15.29 MB - 49.03x memory usage +14.98 MB
-dimi_trie        10.83 MB - 34.73x memory usage +10.52 MB
+using_ets         0.32 MB
+trie_hard         0.20 MB - 0.62x memory usage -0.12187 MB
+retrieval        16.53 MB - 50.97x memory usage +16.20 MB
+dimi_trie        11.63 MB - 35.87x memory usage +11.30 MB
 
 **All measurements for memory usage were the same**
 
-**** Running V1 with 175 possible commands all possible matches, input fitering enabled ****
+**** Running V1 with 175 possible commands, all possible matches ****
 
-Generated 800 words from commands in 450 µs.
-Generated 200 words from dict in 124653 µs.
+Generated 800 words from commands in 532 µs.
+Generated 200 words from dict in 124880 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -227,35 +227,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets        767.33        1.30 ms     ±3.90%        1.30 ms        1.46 ms
-trie_hard        252.18        3.97 ms     ±1.48%        3.96 ms        4.15 ms
-dimi_trie        192.62        5.19 ms     ±1.78%        5.18 ms        5.44 ms
-retrieval        185.81        5.38 ms     ±3.56%        5.34 ms        5.96 ms
+using_ets        746.56        1.34 ms     ±3.86%        1.35 ms        1.47 ms
+trie_hard        238.64        4.19 ms     ±0.98%        4.20 ms        4.28 ms
+dimi_trie        187.70        5.33 ms     ±1.58%        5.32 ms        5.53 ms
+retrieval        179.30        5.58 ms     ±3.42%        5.52 ms        6.11 ms
 
 Comparison: 
-using_ets        767.33
-trie_hard        252.18 - 3.04x slower +2.66 ms
-dimi_trie        192.62 - 3.98x slower +3.89 ms
-retrieval        185.81 - 4.13x slower +4.08 ms
+using_ets        746.56
+trie_hard        238.64 - 3.13x slower +2.85 ms
+dimi_trie        187.70 - 3.98x slower +3.99 ms
+retrieval        179.30 - 4.16x slower +4.24 ms
 
 Memory usage statistics:
 
-Name              average  deviation         median         99th %
-using_ets         1.49 MB     ±0.00%        1.49 MB        1.49 MB
-trie_hard         0.81 MB     ±0.00%        0.81 MB        0.81 MB
-dimi_trie        12.04 MB     ±0.00%       12.04 MB       12.04 MB
-retrieval        17.12 MB     ±0.00%       17.12 MB       17.12 MB
+Name         Memory usage
+using_ets         1.56 MB
+trie_hard         0.85 MB - 0.54x memory usage -0.71501 MB
+dimi_trie        12.61 MB - 8.07x memory usage +11.04 MB
+retrieval        17.98 MB - 11.51x memory usage +16.42 MB
 
-Comparison: 
-using_ets         1.49 MB
-trie_hard         0.81 MB - 0.54x memory usage -0.68504 MB
-dimi_trie        12.04 MB - 8.07x memory usage +10.55 MB
-retrieval        17.12 MB - 11.48x memory usage +15.63 MB
+**All measurements for memory usage were the same**
 
 **** Running V2 with 175 possible commands ****
 
-Generated 800 words from commands in 430 µs.
-Generated 200 words from dict in 124693 µs.
+Generated 800 words from commands in 512 µs.
+Generated 200 words from dict in 138854 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -283,34 +279,34 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets       3252.74        0.31 ms     ±4.54%        0.30 ms        0.36 ms
-triehard1       1701.73        0.59 ms     ±2.49%        0.59 ms        0.63 ms
-triehard2        352.32        2.84 ms     ±1.67%        2.83 ms        2.99 ms
-dimi_trie        168.40        5.94 ms     ±9.18%        5.79 ms        8.48 ms
-retrieval        161.51        6.19 ms     ±4.20%        6.12 ms        6.85 ms
+using_ets       3329.24        0.30 ms     ±4.07%        0.30 ms        0.33 ms
+triehard1       1660.78        0.60 ms     ±3.91%        0.61 ms        0.64 ms
+triehard2        374.87        2.67 ms     ±1.02%        2.67 ms        2.75 ms
+retrieval        176.29        5.67 ms     ±3.63%        5.62 ms        6.41 ms
+dimi_trie        151.63        6.60 ms    ±11.18%        6.95 ms        8.04 ms
 
 Comparison: 
-using_ets       3252.74
-triehard1       1701.73 - 1.91x slower +0.28 ms
-triehard2        352.32 - 9.23x slower +2.53 ms
-dimi_trie        168.40 - 19.32x slower +5.63 ms
-retrieval        161.51 - 20.14x slower +5.88 ms
+using_ets       3329.24
+triehard1       1660.78 - 2.00x slower +0.30 ms
+triehard2        374.87 - 8.88x slower +2.37 ms
+retrieval        176.29 - 18.88x slower +5.37 ms
+dimi_trie        151.63 - 21.96x slower +6.29 ms
 
 Memory usage statistics:
 
 Name              average  deviation         median         99th %
-using_ets       144.20 KB     ±0.00%      144.20 KB      144.20 KB
-triehard1       127.36 KB     ±0.00%      127.36 KB      127.36 KB
-triehard2       632.90 KB     ±0.00%      632.90 KB      632.90 KB
-dimi_trie     13742.87 KB     ±0.00%    13742.87 KB    13742.87 KB
-retrieval     19711.95 KB     ±0.00%    19711.95 KB    19711.95 KB
+using_ets       143.23 KB     ±0.00%      143.23 KB      143.23 KB
+triehard1       127.02 KB     ±0.00%      127.02 KB      127.02 KB
+triehard2       578.16 KB     ±0.00%      578.16 KB      578.16 KB
+retrieval     18482.30 KB     ±0.00%    18482.30 KB    18482.30 KB
+dimi_trie     12957.66 KB     ±0.00%    12957.66 KB    12957.66 KB
 
 Comparison: 
-using_ets       144.20 KB
-triehard1       127.36 KB - 0.88x memory usage -16.84375 KB
-triehard2       632.90 KB - 4.39x memory usage +488.70 KB
-dimi_trie     13742.87 KB - 95.30x memory usage +13598.66 KB
-retrieval     19711.95 KB - 136.70x memory usage +19567.74 KB
+using_ets       143.23 KB
+triehard1       127.02 KB - 0.89x memory usage -16.20313 KB
+triehard2       578.16 KB - 4.04x memory usage +434.93 KB
+retrieval     18482.30 KB - 129.04x memory usage +18339.07 KB
+dimi_trie     12957.66 KB - 90.47x memory usage +12814.43 KB
 ```
 </details>
 
@@ -318,10 +314,10 @@ retrieval     19711.95 KB - 136.70x memory usage +19567.74 KB
   <summary>For 1000 random words</summary>
 
 ```
-**** Running V1 with 1000 possible commands 10 possible matches, input fitering enabled ****
+**** Running V1 with 1000 possible commands, 10 possible matches, input fitering enabled ****
 
-Generated 800 words from commands in 163860 µs.
-Generated 200 words from dict in 154706 µs.
+Generated 800 words from commands in 165793 µs.
+Generated 200 words from dict in 152761 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -348,31 +344,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets        2.22 K      450.30 μs     ±2.50%      447.38 μs      499.88 μs
-retrieval        1.76 K      567.73 μs     ±2.69%      565.59 μs      626.82 μs
-trie_hard        1.37 K      729.02 μs     ±2.23%      732.54 μs      770.75 μs
-dimi_trie        1.00 K     1004.04 μs     ±2.31%     1000.09 μs     1093.84 μs
+using_ets        2.28 K      438.67 μs     ±3.32%      444.87 μs      462.51 μs
+retrieval        1.74 K      574.21 μs     ±2.67%      577.66 μs      601.10 μs
+trie_hard        1.33 K      749.08 μs     ±3.62%      759.33 μs      798.37 μs
+dimi_trie        0.99 K     1012.33 μs     ±2.82%     1023.78 μs     1059.35 μs
 
 Comparison: 
-using_ets        2.22 K
-retrieval        1.76 K - 1.26x slower +117.44 μs
-trie_hard        1.37 K - 1.62x slower +278.72 μs
-dimi_trie        1.00 K - 2.23x slower +553.75 μs
+using_ets        2.28 K
+retrieval        1.74 K - 1.31x slower +135.54 μs
+trie_hard        1.33 K - 1.71x slower +310.41 μs
+dimi_trie        0.99 K - 2.31x slower +573.66 μs
 
 Memory usage statistics:
 
 Name         Memory usage
 using_ets         0.24 MB
-retrieval         2.02 MB - 8.50x memory usage +1.78 MB
-trie_hard        0.136 MB - 0.57x memory usage -0.10195 MB
-dimi_trie         2.25 MB - 9.45x memory usage +2.01 MB
+retrieval         2.15 MB - 8.97x memory usage +1.91 MB
+trie_hard        0.142 MB - 0.59x memory usage -0.09818 MB
+dimi_trie         2.33 MB - 9.71x memory usage +2.09 MB
 
 **All measurements for memory usage were the same**
 
-**** Running V1 with 1000 possible commands 10 possible matches, input fitering disabled ****
+**** Running V1 with 1000 possible commands, 10 possible matches, input fitering disabled ****
 
-Generated 800 words from commands in 2090 µs.
-Generated 200 words from dict in 146283 µs.
+Generated 800 words from commands in 1930 µs.
+Generated 200 words from dict in 150073 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -399,31 +395,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets       1811.05        0.55 ms     ±2.52%        0.55 ms        0.62 ms
-trie_hard        773.51        1.29 ms     ±1.99%        1.29 ms        1.39 ms
-retrieval        305.14        3.28 ms     ±1.50%        3.26 ms        3.44 ms
-dimi_trie        254.10        3.94 ms     ±1.30%        3.92 ms        4.10 ms
+using_ets       1812.33        0.55 ms     ±3.01%        0.56 ms        0.58 ms
+trie_hard        746.40        1.34 ms     ±2.76%        1.35 ms        1.40 ms
+retrieval        260.40        3.84 ms     ±1.80%        3.87 ms        3.96 ms
+dimi_trie        209.31        4.78 ms     ±0.87%        4.78 ms        4.91 ms
 
 Comparison: 
-using_ets       1811.05
-trie_hard        773.51 - 2.34x slower +0.74 ms
-retrieval        305.14 - 5.94x slower +2.72 ms
-dimi_trie        254.10 - 7.13x slower +3.38 ms
+using_ets       1812.33
+trie_hard        746.40 - 2.43x slower +0.79 ms
+retrieval        260.40 - 6.96x slower +3.29 ms
+dimi_trie        209.31 - 8.66x slower +4.23 ms
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets         0.37 MB
-trie_hard         0.23 MB - 0.62x memory usage -0.14212 MB
-retrieval        14.76 MB - 39.97x memory usage +14.39 MB
-dimi_trie        10.32 MB - 27.95x memory usage +9.95 MB
+using_ets         0.38 MB
+trie_hard         0.23 MB - 0.62x memory usage -0.14467 MB
+retrieval        17.72 MB - 46.81x memory usage +17.34 MB
+dimi_trie        12.22 MB - 32.28x memory usage +11.84 MB
 
 **All measurements for memory usage were the same**
 
-**** Running V1 with 1000 possible commands all possible matches, input fitering enabled ****
+**** Running V1 with 1000 possible commands, all possible matches ****
 
-Generated 800 words from commands in 1799 µs.
-Generated 200 words from dict in 150282 µs.
+Generated 800 words from commands in 2279 µs.
+Generated 200 words from dict in 148681 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -450,31 +446,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets        836.06        1.20 ms     ±3.08%        1.19 ms        1.30 ms
-retrieval        236.91        4.22 ms     ±1.26%        4.20 ms        4.41 ms
-trie_hard        228.05        4.39 ms     ±1.39%        4.37 ms        4.58 ms
-dimi_trie        189.69        5.27 ms    ±11.75%        5.08 ms        7.71 ms
+using_ets        893.24        1.12 ms     ±3.19%        1.13 ms        1.18 ms
+retrieval        259.07        3.86 ms     ±1.45%        3.87 ms        4.01 ms
+trie_hard        240.70        4.15 ms     ±1.40%        4.15 ms        4.43 ms
+dimi_trie        212.21        4.71 ms     ±1.54%        4.74 ms        4.86 ms
 
 Comparison: 
-using_ets        836.06
-retrieval        236.91 - 3.53x slower +3.03 ms
-trie_hard        228.05 - 3.67x slower +3.19 ms
-dimi_trie        189.69 - 4.41x slower +4.08 ms
+using_ets        893.24
+retrieval        259.07 - 3.45x slower +2.74 ms
+trie_hard        240.70 - 3.71x slower +3.04 ms
+dimi_trie        212.21 - 4.21x slower +3.59 ms
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets         1.18 MB
-retrieval        19.31 MB - 16.34x memory usage +18.13 MB
-trie_hard         0.68 MB - 0.58x memory usage -0.49983 MB
-dimi_trie        13.27 MB - 11.23x memory usage +12.09 MB
+using_ets         1.12 MB
+retrieval        18.02 MB - 16.13x memory usage +16.90 MB
+trie_hard         0.63 MB - 0.56x memory usage -0.48742 MB
+dimi_trie        12.44 MB - 11.13x memory usage +11.32 MB
 
 **All measurements for memory usage were the same**
 
 **** Running V2 with 1000 possible commands ****
 
-Generated 800 words from commands in 1662 µs.
-Generated 200 words from dict in 102995 µs.
+Generated 800 words from commands in 2241 µs.
+Generated 200 words from dict in 144635 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -502,27 +498,27 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets       2469.21        0.40 ms     ±2.44%        0.40 ms        0.45 ms
-triehard1       1218.63        0.82 ms     ±2.60%        0.82 ms        0.91 ms
-retrieval        293.53        3.41 ms     ±1.49%        3.39 ms        3.57 ms
-triehard2        268.71        3.72 ms     ±1.38%        3.71 ms        3.90 ms
-dimi_trie        245.54        4.07 ms     ±2.77%        4.03 ms        4.45 ms
+using_ets       2515.74        0.40 ms     ±2.21%        0.40 ms        0.42 ms
+triehard1       1269.95        0.79 ms     ±3.74%        0.80 ms        0.84 ms
+triehard2        251.21        3.98 ms     ±1.29%        4.00 ms        4.12 ms
+retrieval        239.59        4.17 ms    ±13.09%        4.04 ms        6.72 ms
+dimi_trie        206.20        4.85 ms     ±0.94%        4.86 ms        4.96 ms
 
 Comparison: 
-using_ets       2469.21
-triehard1       1218.63 - 2.03x slower +0.42 ms
-retrieval        293.53 - 8.41x slower +3.00 ms
-triehard2        268.71 - 9.19x slower +3.32 ms
-dimi_trie        245.54 - 10.06x slower +3.67 ms
+using_ets       2515.74
+triehard1       1269.95 - 1.98x slower +0.39 ms
+triehard2        251.21 - 10.01x slower +3.58 ms
+retrieval        239.59 - 10.50x slower +3.78 ms
+dimi_trie        206.20 - 12.20x slower +4.45 ms
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets       168.72 KB
-triehard1       137.73 KB - 0.82x memory usage -30.98438 KB
-retrieval     15612.29 KB - 92.53x memory usage +15443.57 KB
-triehard2       616.92 KB - 3.66x memory usage +448.20 KB
-dimi_trie     10886.73 KB - 64.53x memory usage +10718.01 KB
+using_ets       164.39 KB
+triehard1       134.97 KB - 0.82x memory usage -29.42188 KB
+triehard2       658.70 KB - 4.01x memory usage +494.31 KB
+retrieval     18484.42 KB - 112.44x memory usage +18320.03 KB
+dimi_trie     12743.24 KB - 77.52x memory usage +12578.85 KB
 
 **All measurements for memory usage were the same**
 ```
@@ -532,10 +528,10 @@ dimi_trie     10886.73 KB - 64.53x memory usage +10718.01 KB
   <summary>For 10,000 random words</summary>
 
 ```
-**** Running V1 with 10000 possible commands 10 possible matches, input fitering enabled ****
+**** Running V1 with 10000 possible commands, 10 possible matches, input fitering enabled ****
 
-Generated 800 words from commands in 1413329 µs.
-Generated 200 words from dict in 420572 µs.
+Generated 800 words from commands in 1365876 µs.
+Generated 200 words from dict in 449839 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -562,31 +558,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets        1.73 K      578.65 μs     ±2.22%      575.17 μs      638.72 μs
-retrieval        1.51 K      661.19 μs     ±5.94%      657.71 μs      758.08 μs
-trie_hard        1.26 K      792.67 μs     ±2.26%      789.63 μs      863.07 μs
-dimi_trie        0.82 K     1214.37 μs     ±4.66%     1211.63 μs     1349.84 μs
+using_ets        1.78 K      562.94 μs     ±3.10%      569.83 μs      593.83 μs
+retrieval        1.61 K      622.31 μs     ±4.47%      610.50 μs      682.45 μs
+trie_hard        1.30 K      771.12 μs     ±2.86%      776.37 μs      819.66 μs
+dimi_trie        0.86 K     1156.14 μs     ±2.97%     1162.91 μs     1246.94 μs
 
 Comparison: 
-using_ets        1.73 K
-retrieval        1.51 K - 1.14x slower +82.54 μs
-trie_hard        1.26 K - 1.37x slower +214.01 μs
-dimi_trie        0.82 K - 2.10x slower +635.71 μs
+using_ets        1.78 K
+retrieval        1.61 K - 1.11x slower +59.36 μs
+trie_hard        1.30 K - 1.37x slower +208.18 μs
+dimi_trie        0.86 K - 2.05x slower +593.19 μs
 
 Memory usage statistics:
 
 Name         Memory usage
 using_ets         0.25 MB
-retrieval         1.99 MB - 7.97x memory usage +1.74 MB
-trie_hard        0.153 MB - 0.61x memory usage -0.09705 MB
-dimi_trie         2.33 MB - 9.34x memory usage +2.08 MB
+retrieval         1.90 MB - 7.69x memory usage +1.65 MB
+trie_hard        0.153 MB - 0.62x memory usage -0.09419 MB
+dimi_trie         2.30 MB - 9.30x memory usage +2.05 MB
 
 **All measurements for memory usage were the same**
 
-**** Running V1 with 10000 possible commands 10 possible matches, input fitering disabled ****
+**** Running V1 with 10000 possible commands, 10 possible matches, input fitering disabled ****
 
-Generated 800 words from commands in 24320 µs.
-Generated 200 words from dict in 128701 µs.
+Generated 800 words from commands in 24208 µs.
+Generated 200 words from dict in 129073 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -613,31 +609,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets       1266.55        0.79 ms     ±2.05%        0.78 ms        0.87 ms
-trie_hard        581.61        1.72 ms     ±1.70%        1.72 ms        1.83 ms
-retrieval         24.95       40.08 ms    ±11.69%       42.98 ms       46.29 ms
-dimi_trie         24.58       40.68 ms     ±0.68%       40.63 ms       41.46 ms
+using_ets       1290.79        0.77 ms     ±1.43%        0.77 ms        0.81 ms
+trie_hard        575.22        1.74 ms     ±1.40%        1.74 ms        1.80 ms
+dimi_trie         26.07       38.36 ms     ±0.52%       38.35 ms       38.90 ms
+retrieval         24.08       41.52 ms     ±0.75%       41.53 ms       42.33 ms
 
 Comparison: 
-using_ets       1266.55
-trie_hard        581.61 - 2.18x slower +0.93 ms
-retrieval         24.95 - 50.76x slower +39.29 ms
-dimi_trie         24.58 - 51.52x slower +39.89 ms
+using_ets       1290.79
+trie_hard        575.22 - 2.24x slower +0.96 ms
+dimi_trie         26.07 - 49.51x slower +37.58 ms
+retrieval         24.08 - 53.60x slower +40.75 ms
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets         0.50 MB
-trie_hard         0.32 MB - 0.65x memory usage -0.17729 MB
-retrieval       150.14 MB - 300.22x memory usage +149.64 MB
-dimi_trie        99.87 MB - 199.71x memory usage +99.37 MB
+using_ets         0.49 MB
+trie_hard         0.33 MB - 0.66x memory usage -0.16483 MB
+dimi_trie        95.75 MB - 194.93x memory usage +95.26 MB
+retrieval       143.77 MB - 292.70x memory usage +143.28 MB
 
 **All measurements for memory usage were the same**
 
-**** Running V1 with 10000 possible commands all possible matches, input fitering enabled ****
+**** Running V1 with 10000 possible commands, all possible matches ****
 
-Generated 800 words from commands in 26290 µs.
-Generated 200 words from dict in 142697 µs.
+Generated 800 words from commands in 24950 µs.
+Generated 200 words from dict in 123383 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -664,31 +660,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets        115.29        8.67 ms     ±3.38%        8.75 ms        9.29 ms
-trie_hard         30.31       32.99 ms     ±1.07%       32.93 ms       34.13 ms
-dimi_trie         25.98       38.49 ms     ±0.99%       38.41 ms       39.71 ms
-retrieval         24.30       41.16 ms     ±4.17%       40.78 ms       51.72 ms
+using_ets        124.85        8.01 ms     ±2.77%        8.04 ms        8.39 ms
+trie_hard         32.55       30.72 ms     ±0.84%       30.65 ms       31.52 ms
+dimi_trie         28.89       34.61 ms     ±0.74%       34.60 ms       35.54 ms
+retrieval         28.44       35.17 ms     ±2.82%       35.73 ms       36.35 ms
 
 Comparison: 
-using_ets        115.29
-trie_hard         30.31 - 3.80x slower +24.32 ms
-dimi_trie         25.98 - 4.44x slower +29.82 ms
-retrieval         24.30 - 4.74x slower +32.48 ms
+using_ets        124.85
+trie_hard         32.55 - 3.84x slower +22.71 ms
+dimi_trie         28.89 - 4.32x slower +26.60 ms
+retrieval         28.44 - 4.39x slower +27.16 ms
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets         9.22 MB
-trie_hard         4.56 MB - 0.49x memory usage -4.66603 MB
-dimi_trie        91.70 MB - 9.94x memory usage +82.48 MB
-retrieval       137.75 MB - 14.93x memory usage +128.52 MB
+using_ets         8.45 MB
+trie_hard         4.32 MB - 0.51x memory usage -4.12563 MB
+dimi_trie        85.51 MB - 10.12x memory usage +77.06 MB
+retrieval       128.26 MB - 15.18x memory usage +119.81 MB
 
 **All measurements for memory usage were the same**
 
 **** Running V2 with 10000 possible commands ****
 
-Generated 800 words from commands in 33446 µs.
-Generated 200 words from dict in 127694 µs.
+Generated 800 words from commands in 27862 µs.
+Generated 200 words from dict in 126580 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -716,27 +712,27 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets       1877.14        0.53 ms     ±1.93%        0.53 ms        0.58 ms
-triehard1       1165.47        0.86 ms     ±2.15%        0.86 ms        0.93 ms
-triehard2        155.00        6.45 ms     ±2.22%        6.37 ms        6.97 ms
-retrieval         26.26       38.09 ms    ±10.25%       35.98 ms       48.87 ms
-dimi_trie         24.01       41.65 ms     ±0.72%       41.62 ms       42.87 ms
+using_ets       1915.84        0.52 ms     ±2.17%        0.52 ms        0.55 ms
+triehard1       1152.70        0.87 ms     ±2.53%        0.87 ms        0.91 ms
+triehard2        162.84        6.14 ms     ±2.12%        6.19 ms        6.41 ms
+retrieval         38.26       26.14 ms     ±3.26%       25.71 ms       27.93 ms
+dimi_trie         31.54       31.71 ms     ±0.66%       31.68 ms       32.80 ms
 
 Comparison: 
-using_ets       1877.14
-triehard1       1165.47 - 1.61x slower +0.33 ms
-triehard2        155.00 - 12.11x slower +5.92 ms
-retrieval         26.26 - 71.50x slower +37.56 ms
-dimi_trie         24.01 - 78.19x slower +41.12 ms
+using_ets       1915.84
+triehard1       1152.70 - 1.66x slower +0.35 ms
+triehard2        162.84 - 11.76x slower +5.62 ms
+retrieval         38.26 - 50.07x slower +25.62 ms
+dimi_trie         31.54 - 60.75x slower +31.19 ms
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets        0.161 MB
-triehard1        0.142 MB - 0.88x memory usage -0.01913 MB
-triehard2         1.12 MB - 6.96x memory usage +0.96 MB
-retrieval       150.24 MB - 931.67x memory usage +150.08 MB
-dimi_trie        99.96 MB - 619.88x memory usage +99.80 MB
+using_ets        0.159 MB
+triehard1        0.142 MB - 0.89x memory usage -0.01712 MB
+triehard2         1.07 MB - 6.70x memory usage +0.91 MB
+retrieval       113.93 MB - 715.41x memory usage +113.77 MB
+dimi_trie        78.65 MB - 493.85x memory usage +78.49 MB
 
 **All measurements for memory usage were the same**
 ```
@@ -746,10 +742,10 @@ dimi_trie        99.96 MB - 619.88x memory usage +99.80 MB
   <summary>For 100,000 random words</summary>
 
 ```
-**** Running V1 with 100000 possible commands 10 possible matches, input fitering enabled ****
+**** Running V1 with 100000 possible commands, 10 possible matches, input fitering enabled ****
 
-Generated 800 words from commands in 12770887 µs.
-Generated 200 words from dict in 2989303 µs.
+Generated 800 words from commands in 11633359 µs.
+Generated 200 words from dict in 2977319 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -776,31 +772,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets        1.46 K      683.24 μs     ±1.03%      682.13 μs      709.34 μs
-retrieval        1.32 K      759.15 μs    ±14.17%      753.09 μs      882.05 μs
-trie_hard        1.10 K      908.58 μs     ±2.06%      907.36 μs      978.12 μs
-dimi_trie        0.77 K     1303.74 μs    ±14.61%     1209.63 μs     1555.44 μs
+using_ets        1.39 K      721.70 μs     ±1.16%      720.53 μs      752.38 μs
+retrieval        1.30 K      769.20 μs    ±15.21%      784.47 μs      927.12 μs
+trie_hard        1.08 K      923.15 μs     ±3.25%      932.28 μs      970.25 μs
+dimi_trie        0.77 K     1303.12 μs    ±17.15%     1212.95 μs     1738.30 μs
 
 Comparison: 
-using_ets        1.46 K
-retrieval        1.32 K - 1.11x slower +75.91 μs
-trie_hard        1.10 K - 1.33x slower +225.34 μs
-dimi_trie        0.77 K - 1.91x slower +620.50 μs
+using_ets        1.39 K
+retrieval        1.30 K - 1.07x slower +47.50 μs
+trie_hard        1.08 K - 1.28x slower +201.45 μs
+dimi_trie        0.77 K - 1.81x slower +581.41 μs
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets         0.26 MB
-retrieval         1.91 MB - 7.23x memory usage +1.65 MB
-trie_hard        0.196 MB - 0.74x memory usage -0.06888 MB
-dimi_trie         2.49 MB - 9.42x memory usage +2.23 MB
+using_ets         0.29 MB
+retrieval         2.04 MB - 6.91x memory usage +1.74 MB
+trie_hard         0.20 MB - 0.69x memory usage -0.09048 MB
+dimi_trie         2.55 MB - 8.66x memory usage +2.26 MB
 
 **All measurements for memory usage were the same**
 
-**** Running V1 with 100000 possible commands 10 possible matches, input fitering disabled ****
+**** Running V1 with 100000 possible commands, 10 possible matches, input fitering disabled ****
 
-Generated 800 words from commands in 152667 µs.
-Generated 200 words from dict in 145101 µs.
+Generated 800 words from commands in 131342 µs.
+Generated 200 words from dict in 110388 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -827,31 +823,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets       1156.77        0.86 ms     ±1.65%        0.86 ms        0.93 ms
-trie_hard        550.10        1.82 ms     ±1.70%        1.81 ms        1.96 ms
-dimi_trie          3.59      278.26 ms     ±0.93%      277.59 ms      287.06 ms
-retrieval          2.83      352.74 ms     ±7.13%      352.30 ms      389.58 ms
+using_ets       1114.43        0.90 ms     ±1.49%        0.90 ms        0.94 ms
+trie_hard        543.55        1.84 ms     ±0.97%        1.84 ms        1.91 ms
+dimi_trie          3.11      321.80 ms     ±0.67%      321.46 ms      332.19 ms
+retrieval          2.60      384.12 ms     ±2.25%      383.72 ms      423.60 ms
 
 Comparison: 
-using_ets       1156.77
-trie_hard        550.10 - 2.10x slower +0.95 ms
-dimi_trie          3.59 - 321.89x slower +277.40 ms
-retrieval          2.83 - 408.04x slower +351.87 ms
+using_ets       1114.43
+trie_hard        543.55 - 2.05x slower +0.94 ms
+dimi_trie          3.11 - 358.62x slower +320.90 ms
+retrieval          2.60 - 428.07x slower +383.22 ms
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets         0.48 MB
-trie_hard         0.42 MB - 0.87x memory usage -0.06001 MB
-dimi_trie       631.29 MB - 1326.56x memory usage +630.81 MB
-retrieval       901.64 MB - 1894.67x memory usage +901.17 MB
+using_ets       514.34 KB
+trie_hard       430.45 KB - 0.84x memory usage -83.88281 KB
+dimi_trie    772356.63 KB - 1501.66x memory usage +771842.30 KB
+retrieval   1101846.63 KB - 2142.27x memory usage +1101332.30 KB
 
 **All measurements for memory usage were the same**
 
-**** Running V1 with 100000 possible commands all possible matches, input fitering enabled ****
+**** Running V1 with 100000 possible commands, all possible matches ****
 
-Generated 800 words from commands in 154087 µs.
-Generated 200 words from dict in 143910 µs.
+Generated 800 words from commands in 144886 µs.
+Generated 200 words from dict in 139166 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -878,31 +874,31 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets         17.45       57.32 ms     ±1.74%       57.24 ms       60.18 ms
-dimi_trie          3.53      283.39 ms     ±0.85%      283.14 ms      295.19 ms
-retrieval          3.22      310.30 ms     ±2.51%      308.12 ms      341.81 ms
-trie_hard          2.94      340.08 ms     ±1.71%      338.80 ms      364.03 ms
+using_ets         17.83       56.08 ms     ±7.33%       55.59 ms       67.69 ms
+dimi_trie          3.45      289.49 ms     ±0.68%      289.20 ms      299.83 ms
+trie_hard          2.94      340.01 ms     ±0.56%      340.05 ms      346.28 ms
+retrieval          2.91      343.10 ms     ±1.19%      342.28 ms      359.49 ms
 
 Comparison: 
-using_ets         17.45
-dimi_trie          3.53 - 4.94x slower +226.08 ms
-retrieval          3.22 - 5.41x slower +252.98 ms
-trie_hard          2.94 - 5.93x slower +282.77 ms
+using_ets         17.83
+dimi_trie          3.45 - 5.16x slower +233.41 ms
+trie_hard          2.94 - 6.06x slower +283.93 ms
+retrieval          2.91 - 6.12x slower +287.02 ms
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets        44.90 MB
-dimi_trie       658.29 MB - 14.66x memory usage +613.39 MB
-retrieval       939.63 MB - 20.93x memory usage +894.73 MB
-trie_hard        39.03 MB - 0.87x memory usage -5.86473 MB
+using_ets        50.48 MB
+dimi_trie       677.16 MB - 13.42x memory usage +626.69 MB
+trie_hard        39.52 MB - 0.78x memory usage -10.95693 MB
+retrieval       966.18 MB - 19.14x memory usage +915.70 MB
 
 **All measurements for memory usage were the same**
 
 **** Running V2 with 100000 possible commands ****
 
-Generated 800 words from commands in 165405 µs.
-Generated 200 words from dict in 93864 µs.
+Generated 800 words from commands in 152969 µs.
+Generated 200 words from dict in 89789 µs.
 Operating System: macOS
 CPU Information: Apple M2 Max
 Number of Available Cores: 12
@@ -930,27 +926,27 @@ Calculating statistics...
 Formatting results...
 
 Name                ips        average  deviation         median         99th %
-using_ets       1685.03        0.59 ms     ±1.79%        0.59 ms        0.64 ms
-triehard1       1349.31        0.74 ms     ±1.97%        0.74 ms        0.80 ms
-triehard2        175.04        5.71 ms     ±1.51%        5.69 ms        6.03 ms
-retrieval          8.02      124.73 ms     ±9.48%      126.88 ms      161.74 ms
-dimi_trie          3.10      322.40 ms     ±0.76%      321.55 ms      330.85 ms
+using_ets       1616.58        0.62 ms     ±1.13%        0.62 ms        0.65 ms
+triehard1       1266.30        0.79 ms     ±2.38%        0.79 ms        0.86 ms
+triehard2        163.65        6.11 ms     ±0.62%        6.10 ms        6.28 ms
+retrieval          4.86      205.81 ms     ±4.52%      212.78 ms      220.99 ms
+dimi_trie          3.45      289.82 ms     ±2.18%      288.03 ms      318.62 ms
 
 Comparison: 
-using_ets       1685.03
-triehard1       1349.31 - 1.25x slower +0.148 ms
-triehard2        175.04 - 9.63x slower +5.12 ms
-retrieval          8.02 - 210.18x slower +124.14 ms
-dimi_trie          3.10 - 543.25x slower +321.80 ms
+using_ets       1616.58
+triehard1       1266.30 - 1.28x slower +0.171 ms
+triehard2        163.65 - 9.88x slower +5.49 ms
+retrieval          4.86 - 332.71x slower +205.19 ms
+dimi_trie          3.45 - 468.52x slower +289.21 ms
 
 Memory usage statistics:
 
 Name         Memory usage
-using_ets        0.136 MB
-triehard1        0.140 MB - 1.04x memory usage +0.00492 MB
-triehard2         1.20 MB - 8.84x memory usage +1.06 MB
-retrieval       443.16 MB - 3270.25x memory usage +443.03 MB
-dimi_trie       742.06 MB - 5475.94x memory usage +741.93 MB
+using_ets        0.144 MB
+triehard1        0.144 MB - 1.00x memory usage -0.00027 MB
+triehard2         1.23 MB - 8.51x memory usage +1.08 MB
+retrieval       586.41 MB - 4068.47x memory usage +586.26 MB
+dimi_trie       660.71 MB - 4584.01x memory usage +660.57 MB
 
 **All measurements for memory usage were the same**
 ```
@@ -1008,4 +1004,4 @@ Unfortunately, the lack of an ability to directly query for an exact match is re
 
 Obviously, you can always maintain a `Map` alongside your `Trie` if exact matches are important to you, but all the other approaches offer this functionality in the same data structure.
 
-This library also spent most of its time around the bottom of the performance charts, with one major exception — in the V1 case with 100k commands, all matches, and no filtering, it actually outperformed everything except ETS.  (Granted, ETS still outperformed it by nearly 5x.)
+This library also spent most of its time around the bottom of the performance charts, with one major exception — in the V1 case with 100k commands, all matches, and no filtering, it actually outperformed everything except ETS.  (Granted, ETS still outperformed it by more than 5x.)
