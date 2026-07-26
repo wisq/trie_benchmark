@@ -8,9 +8,13 @@ defmodule TrieBenchmark.V1 do
 
     IO.puts([
       "\n",
-      "**** Running V1 with #{Enum.count(commands)} possible commands",
-      " #{max_matches} possible matches,",
-      " input fitering #{if filter_input?, do: "enabled", else: "disabled"}",
+      "**** Running V1 with #{Enum.count(commands)} possible commands,",
+      " #{max_matches} possible matches",
+      if max_matches == :all do
+        ""
+      else
+        ", input fitering #{if filter_input?, do: "enabled", else: "disabled"}"
+      end,
       " ****\n"
     ])
 
