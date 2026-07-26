@@ -47,11 +47,13 @@ defmodule TrieBenchmark do
     trie_hard = build_trie_hard()
     retrieval = build_retrieval()
     dimi_trie = build_dimi_trie()
+    using_ets = build_using_ets()
 
     %{
       trie_hard: &search_trie_hard(trie_hard, &1),
       retrieval: &search_retrieval(retrieval, &1),
-      dimi_trie: &search_dimi_trie(dimi_trie, &1)
+      dimi_trie: &search_dimi_trie(dimi_trie, &1),
+      using_ets: &search_using_ets(using_ets, &1)
     }
   end
 
@@ -97,6 +99,16 @@ defmodule TrieBenchmark do
     trie_hard
   end
 
+  defp build_using_ets do
+    ets = :ets.new(:trie_benchmark, [:ordered_set])
+
+    @commands
+    |> Enum.map(fn c -> {c, true} end)
+    |> then(&:ets.insert(ets, &1))
+
+    ets
+  end
+
   defp build_retrieval, do: Retrieval.new(@commands)
   defp build_dimi_trie, do: Trie.put_words(@commands)
 
@@ -120,7 +132,7 @@ defmodule TrieBenchmark do
     case TrieHard.auto_complete(trie, input, 10) do
       {:ok, []} -> {:error, :not_found}
       {:ok, [match]} -> {:ok, match}
-      {:ok, [_ | _] = list} -> {:error, :ambiguous, Enum.sort(list)}
+      {:ok, [_ | _] = list} -> check_exact_match(list, input)
     end
   end
 
@@ -128,7 +140,7 @@ defmodule TrieBenchmark do
     case Retrieval.prefix(trie, input) do
       [] -> {:error, :not_found}
       [match] -> {:ok, match}
-      [_ | _] = list -> {:error, :ambiguous, Enum.sort(list)}
+      [_ | _] = list -> check_exact_match(list, input)
     end
   end
 
@@ -136,7 +148,38 @@ defmodule TrieBenchmark do
     case Trie.search(trie, input) do
       [] -> {:error, :not_found}
       [match] -> {:ok, match}
-      [_ | _] = list -> {:error, :ambiguous, Enum.sort(list)}
+      [_ | _] = list -> check_exact_match(list, input)
+    end
+  end
+
+  defp search_using_ets(ets, input) do
+    # Unlike the others, this extra first check is mandatory,
+    # since `:ets.next` would actually skip over our exact match.
+    case :ets.member(ets, input) do
+      true ->
+        {:ok, input}
+
+      false ->
+        case ets_all_matches(ets, input, input) do
+          [] -> {:error, :not_found}
+          [match] -> {:ok, match}
+          # Unlike the others, we don't need to check_exact_match/2 here.
+          [_ | _] = list -> {:error, :ambiguous, Enum.sort(list)}
+        end
+    end
+  end
+
+  defp ets_all_matches(ets, input, pos) do
+    case :ets.next(ets, pos) do
+      ^input <> _ = match -> [match | ets_all_matches(ets, input, match)]
+      _ -> []
+    end
+  end
+
+  defp check_exact_match(list, input) do
+    case input in list do
+      true -> {:ok, input}
+      false -> {:error, :ambiguous, Enum.sort(list)}
     end
   end
 end
