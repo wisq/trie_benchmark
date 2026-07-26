@@ -1,7 +1,7 @@
 defmodule TrieBenchmark do
   use Application
 
-  @commands ~w{
+  @pennmush_commands ~w{
     @@ @allhalt @allquota @assert @atrchown @atrlock @attribute @boot @break
     @cemit @channel @chat @chown @chownall @chzone @chzoneall @clist @clock
     @clone @command @config @cpattr @create @dbck @decompile @destroy @dig
@@ -24,13 +24,22 @@ defmodule TrieBenchmark do
   }
 
   def start(_, _) do
-    run()
+    run(@pennmush_commands, 10)
+    run(words_from_dict(10000), 100)
+    run(words_from_dict(100_000), 1000)
     {:ok, self()}
   end
 
-  defp run do
-    query_funcs = build_all_queries()
-    random_input = generate_random_input(800, 200)
+  defp run(commands, max_matches) do
+    IO.puts([
+      "\n",
+      "**** Running with #{Enum.count(commands)} possible commands",
+      " (max per query: #{max_matches}) ****",
+      "\n"
+    ])
+
+    query_funcs = build_all_queries(commands, max_matches)
+    random_input = generate_random_input(800, 200, commands, max_matches)
     sanity_check(random_input, query_funcs)
 
     Benchee.run(
@@ -43,23 +52,23 @@ defmodule TrieBenchmark do
     )
   end
 
-  defp build_all_queries do
-    trie_hard = build_trie_hard()
-    retrieval = build_retrieval()
-    dimi_trie = build_dimi_trie()
-    using_ets = build_using_ets()
+  defp build_all_queries(command_list, max_matches) do
+    trie_hard = build_trie_hard(command_list)
+    retrieval = build_retrieval(command_list)
+    dimi_trie = build_dimi_trie(command_list)
+    using_ets = build_using_ets(command_list)
 
     %{
-      trie_hard: &search_trie_hard(trie_hard, &1),
+      trie_hard: &search_trie_hard(trie_hard, &1, max_matches),
       retrieval: &search_retrieval(retrieval, &1),
       dimi_trie: &search_dimi_trie(dimi_trie, &1),
       using_ets: &search_using_ets(using_ets, &1)
     }
   end
 
-  defp generate_random_input(from_commands, from_dict) do
+  defp generate_random_input(from_commands, from_dict, commands, max_matches) do
     [
-      commands: {&words_from_commands/1, from_commands},
+      commands: {&words_from_commands(&1, commands, max_matches), from_commands},
       dict: {&words_from_dict/1, from_dict}
     ]
     |> Enum.flat_map(fn {key, {fun, count}} ->
@@ -71,16 +80,19 @@ defmodule TrieBenchmark do
     |> Enum.shuffle()
   end
 
-  defp words_from_commands(count) do
+  defp words_from_commands(count, commands, max_matches) do
     Stream.repeatedly(fn ->
-      c = Enum.random(@commands)
+      c = Enum.random(commands)
       l = Enum.random(1..String.length(c))
       String.slice(c, 0, l)
     end)
-    |> Stream.reject(fn
-      "@" -> true
-      <<"@", _>> -> true
-      _ -> false
+    |> Stream.filter(fn c ->
+      commands
+      |> Enum.count(fn
+        ^c <> _ -> true
+        _ -> false
+      end)
+      |> then(fn count -> count <= max_matches end)
     end)
     |> Enum.take(count)
   end
@@ -93,24 +105,24 @@ defmodule TrieBenchmark do
     |> Enum.take(count)
   end
 
-  defp build_trie_hard do
+  defp build_trie_hard(words) do
     trie_hard = TrieHard.new()
-    @commands |> Enum.each(&TrieHard.insert(trie_hard, &1, true))
+    words |> Enum.each(&TrieHard.insert(trie_hard, &1, true))
     trie_hard
   end
 
-  defp build_using_ets do
+  defp build_using_ets(words) do
     ets = :ets.new(:trie_benchmark, [:ordered_set])
 
-    @commands
+    words
     |> Enum.map(fn c -> {c, true} end)
     |> then(&:ets.insert(ets, &1))
 
     ets
   end
 
-  defp build_retrieval, do: Retrieval.new(@commands)
-  defp build_dimi_trie, do: Trie.put_words(@commands)
+  defp build_retrieval(words), do: Retrieval.new(words)
+  defp build_dimi_trie(words), do: Trie.put_words(words)
 
   defp sanity_check(random_input, checks) do
     random_input
@@ -128,8 +140,8 @@ defmodule TrieBenchmark do
     end)
   end
 
-  defp search_trie_hard(trie, input) do
-    case TrieHard.auto_complete(trie, input, 10) do
+  defp search_trie_hard(trie, input, max_matches) do
+    case TrieHard.auto_complete(trie, input, max_matches) do
       {:ok, []} -> {:error, :not_found}
       {:ok, [match]} -> {:ok, match}
       {:ok, [_ | _] = list} -> check_exact_match(list, input)
